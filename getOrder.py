@@ -1,6 +1,7 @@
 #! /usr/bin/python 
 import sys
 import json
+import numbers
 import requests
 from QuoineApiSettings import Settings
 
@@ -13,19 +14,18 @@ hdrs = {
    "X-Quoine-User-Token": api.UserToken
   }
 
+order_id = 0
 if len(sys.argv) > 1:
-  order_id = sys.argv[1]
+  try: 
+    order_id = int(sys.argv[1])
+  except ValueError:
+    print "Invalid Id '%s' provided " % sys.argv[1]
+    sys.exit(1)
 else:
   print "No Order Id provided "
   sys.exit(1)
 
-#if api.is_number(order_id) == False or int(order_id) <= 0:
-#  print "Invalid Order Id '%s'" % order_id
-#  sys.exit(1)
-
-#url = "https://api.quoine.com/orders/%s" % order_id
 url = api.BaseURL  + api.GetOrderURI % order_id
-print "URL : ", url
 
 try:
    response = requests.get(url,headers=hdrs)
