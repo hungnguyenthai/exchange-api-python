@@ -3,11 +3,13 @@ import os
 import sys
 import json
 import requests
+from QuoineApiSettings import Settings
 
-url = "https://api.quoine.com/products/%s/price_levels"
+api = Settings()
 
 ccy_id = "1"
 ccy    = "USD"
+ccy_list = ["AUD","IDR","HKD","SGD","JPY","PHP","USD"]
 
 if len(sys.argv) > 1:
   ccy = sys.argv[1]
@@ -28,12 +30,10 @@ if len(sys.argv) > 1:
   elif ccy == "PHP":
     ccy_id = "15"
   else:
-    print "error = currency supplied %s is not valid" % ccy  
+    print "Error : Currency supplied '%s' is not valid. Select one of %s" % (ccy,",".join(ccy_list))  
     sys.exit(-1)   
    
-url = url % ccy_id
-
-print "\nURL : ", url
+url = api.BaseURL + api.GetPriceLadderURI % ccy_id
 
 r = requests.get(url)
 if r.status_code == 200:

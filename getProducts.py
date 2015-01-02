@@ -3,35 +3,14 @@ import os
 import sys
 import json
 import requests
+from QuoineApiSettings import Settings
+
+api = Settings()
+
+url = api.BaseURL + api.GetProductsURI
 
 if len(sys.argv) > 1:
-  ccy = sys.argv[1]
-  if ccy == "USD":
-    ccy_id = "1"
-  elif ccy == "EUR":
-    ccy_id = "3"
-  elif ccy == "JPY":
-    ccy_id = "5"
-  elif ccy == "SGD":
-    ccy_id = "7"
-  elif ccy == "HKD":
-    ccy_id = "9"
-  elif ccy == "IDR":
-    ccy_id = "11"
-  elif ccy == "AUD":
-    ccy_id = "13"
-  elif ccy == "PHP":
-    ccy_id = "15"
-  else:
-    print "error = currency supplied %s is not valid" % ccy
-    sys.exit(-1)
-  url = "https://api.quoine.com/products/%s" % ccy_id
-  print "\nRetrieving products for currency %s" % ccy
-else:
-  print "\nRetrieving ALL products "
-  url = "https://api.quoine.com/products"
-
-print "URL : \n", url
+  url = "%s/%s" % (url, sys.argv[1])
 
 r = requests.get(url)
 if r.status_code == 200:
@@ -40,6 +19,13 @@ if r.status_code == 200:
    else:
       data = json.loads(r.text)
       print data
+      #for d in data:
+      #  print "++++++++++++++++++++++\n"
+      #  print repr(d)
+        #if d["product_type"] == "CASH":
+        #  for key, value in d.iteritems():
+        #    if key == "id" or key == "currency_pair_code":
+        #       print key, value
       print "\n"
 else:
    print "\nError %s while calling URL %s:\n" % (r.status_code,url)
