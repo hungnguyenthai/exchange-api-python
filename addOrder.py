@@ -88,6 +88,7 @@ request['order'] = order
 try:
    response = requests.post(url,data=json.dumps(request),headers=hdrs)
    print response.status_code
+   print response.headers
    print response.text
 
 except requests.exceptions.HTTPError as e: 
