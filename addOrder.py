@@ -26,8 +26,8 @@ side = ""
 currency_pair_code = ""
 product_code = ""
 
-if len(sys.argv) < 6:
-  print "Full set of Order details not provided, should be <price> <quantity> <order type> <side> <currency pair> "
+if len(sys.argv) < 7:
+  print "Full set of Order details not provided, should be <price> <quantity> <side> <order type> <currency pair> <product> "
   sys.exit(1)
 
 try: 
