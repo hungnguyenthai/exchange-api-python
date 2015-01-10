@@ -1,4 +1,5 @@
-#! /usr/bin/python 
+#! /usr/bin/python
+import json
 import sys
 import requests
 from QuoineApiSettings import Settings
@@ -30,8 +31,11 @@ url = api.BaseURL + api.GetOrdersURI % (base_currency,currency)
 
 try:
    r = requests.get(url,headers=hdrs)
-   print r.status_code
-   print r.text
-except requests.exceptions.HTTPError as e: 
+   #print r.status_code
+   data = json.loads(r.text)
+   for order in data["models"]:
+     print "\n================================="
+     print order["id"], " ", order["status"]," ",order["price"], " ", order["quantity"]
+except requests.exceptions.HTTPError as e:
    print "Error: \n"
    print e
