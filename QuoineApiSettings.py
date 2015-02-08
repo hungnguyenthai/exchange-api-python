@@ -3,10 +3,9 @@
 class Settings():
 
    	UserAgent  = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0"
-	UserId     = "8888"
-	DeviceName = "sample"
-	UserToken  = "1SampleData234923423h"
-
+	UserId     = "ANYID"
+	DeviceName = "ANYDEVICEKEY"
+	UserToken  = "ANYTOKENVALUE"
 	Headers = {
    		"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0",
 		"X-Quoine-Device": DeviceName,
@@ -21,8 +20,8 @@ class Settings():
 	GetAccountsURI    = "accounts"				# [GET] 				
 	GetOrderURI       = "orders/%s"				# [GET] 				
 	GetOrdersURI      = "orders?currency_pair_code=%s%s"	# [GET] 				
+	GetProductURI     = "products/code/%s/%s"               # [GET] 				
 	GetProductsURI    = "products"				# [GET] 				
-	GetProductURI     = "products/code/%s/%s"		# [GET]
         GetPriceLadderURI = "products/%s/price_levels"          # [GET]
         AddOrderURI       = "orders"                            # [POST]
 	CancelOrderURI    = "orders/%s/cancel"	        	# [PUT]

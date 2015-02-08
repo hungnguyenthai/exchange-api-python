@@ -84,7 +84,7 @@ url = api.BaseURL + api.AddOrderURI
 
 request = {}
 request['order'] = order
-
+print order
 try:
    response = requests.post(url,data=json.dumps(request),headers=hdrs)
    print response.status_code
