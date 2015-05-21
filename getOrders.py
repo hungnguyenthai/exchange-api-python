@@ -28,6 +28,7 @@ if currency not in ccy_list:
 base_currency = "BTC"
 
 url = api.BaseURL + api.GetOrdersURI % (base_currency,currency)
+print "URL : ", url
 
 try:
    r = requests.get(url,headers=hdrs)

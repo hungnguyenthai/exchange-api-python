@@ -1,4 +1,6 @@
 #! /usr/bin/python
+# coding: utf-8
+
 import os
 import sys
 import json
@@ -34,7 +36,10 @@ if r.status_code == 200:
    else:
       data = json.loads(r.text)
       for key, value in data.iteritems():
-        print key + " => " + str(value) 
+        if isinstance(value, unicode):
+          print key + " => " + value
+        else:
+          print key + " => " + str(value)
       print "\n"
 else:
    print "\nError %s while calling URL %s:\n" % (r.status_code,url)

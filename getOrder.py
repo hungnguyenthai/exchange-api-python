@@ -26,7 +26,7 @@ else:
   sys.exit(1)
 
 url = api.BaseURL  + api.GetOrderURI % order_id
-
+print url
 try:
    response = requests.get(url,headers=hdrs)
    print response.status_code
