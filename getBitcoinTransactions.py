@@ -2,7 +2,6 @@
 import sys
 import requests
 import json
-
 from QuoineApiSettings import Settings
 
 api = Settings()
@@ -15,16 +14,12 @@ hdrs = {
   }
 
 try:
-   url = api.BaseURL + api.GetAccountsURI 
+   url = api.BaseURL + api.GetBitcoinTransactionsURI
    r = requests.get(url,headers=hdrs)
+   #print r.text
    data = json.loads(r.text)
-   btc = data["bitcoin_account"]
-   print "\n"
-   print btc["id"], " ", btc["currency"]," ",btc["free_balance"], " ", btc["balance"]
-   for account in data["fiat_accounts"]:
-     print "\n================================="
-     print account["id"], " ", account["currency"]," ",account["free_balance"], " ", account["balance"]
+   for tx in data["models"]:
+     print tx["id"], ",",tx["transaction_type"],",",tx["created_at"],",",tx["gross_amount"]
 except requests.exceptions.HTTPError as e: 
    print "Error: \n"
    print e
-print "\n"
